@@ -6,4 +6,6 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 COPY convert.py .
-COPY test.md .
+COPY gather_files.py . 
+
+CMD ["python","convert.py"]

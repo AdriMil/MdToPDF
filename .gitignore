@@ -1,5 +1,4 @@
 convert-md-to-pdf
-*.md
 *.pdf
 *test*
 __pycache__

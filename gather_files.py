@@ -1,4 +1,5 @@
 import glob
+import os
 
 def findMdFiles(search_criteria: str ='./**/*.md')-> list:
     """Search all files with .md extensions in current path and sub paths.
@@ -12,18 +13,36 @@ def findMdFiles(search_criteria: str ='./**/*.md')-> list:
     files = (glob.glob(search_criteria, recursive=True))
     return files
 
-def exclude_files(files_list: list, files_to_exlude: list =[])-> list:
-    """Revome froma a list some files by searching keyword. For example if you do not want include some ".md" file in the final pdf.
+
+def getValueToExcludeFromEnvVar()->list:
+    """Read values from TO_EXCLUDE env var, create a list with a split by "," identification.
+    Example: export TO_EXCLUDE="README.md, REAMDE2.md"
+
+    Returns:
+        list: Contain all values read from TO_EXCLUDE env var.
+    """
+
+    value_to_exclude_from_env = os.getenv('TO_EXCLUDE') # Get values from Env var
+
+    if value_to_exclude_from_env:
+        values_to_exclude = value_to_exclude_from_env.split(',')
+    else:
+        values_to_exclude=[]
+
+    return values_to_exclude
+
+def exclude_files(files_list: list, values_to_exclude: list =[])-> list:
+    """ Remove items from a list by searching keywords. 
 
     Args:
-        files_list (list): Liste with path and files names that are going to be merge in 1 md file.
-        files_to_exlude (list, optional): keywork that will be search and delete from "files_list" list . Defaults to [].
+        files_list (list): Liste with all items.
+        values_to_exclude (list, optional): keywork that will be compare with item names. Defaults to [].
 
     Returns:
         list: _description_
     """
     filtered_list = [file for file in files_list 
-                        if not any(word in file for word in files_to_exlude)]
+                        if not any(word in file for word in values_to_exclude)]
     return filtered_list
 
 def createUniqueMdFile(file_list: list, my_file_name: str):
@@ -37,4 +56,4 @@ def createUniqueMdFile(file_list: list, my_file_name: str):
         for file_path in file_list:
             with open(file_path, 'r', encoding='utf-8') as fin:
                 fout.write(fin.read())
-                fout.write('\n')
+                fout.write('\n')    #Add line break betweend each files.

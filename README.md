@@ -1,6 +1,10 @@
 # Convert your markdown file into PDF
 
+The [convert.py file](convert.py) will call [functions](gather_files.py) to find all ".md" files from a path and subpath. These files will be merge in only one ".md" file. Then this new .md file will be converteed in a pdf file.
+
 ## Build docker container
+
+You will find the [dockerfile here](dockerfile) used to build the image.
 
 **Build docker image** \
 ` docker build -t md_to_pdf .` \

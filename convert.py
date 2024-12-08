@@ -1,11 +1,11 @@
 from markdown_pdf import MarkdownPdf, Section
 from gather_files import exclude_files, findMdFiles, createUniqueMdFile, getValueToExcludeFromEnvVar
-from functions import debug
+from functions import debug, fileName
 
 debug_level = debug()
 
 #VARIABLES
-file_name_without_extention = "Documentation"
+file_name_without_extention=fileName()
 md_file_name = file_name_without_extention + ".md"
 pdf_file_name = file_name_without_extention + ".pdf"
 

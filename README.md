@@ -1,6 +1,6 @@
-# Convert your markdown file into PDF
+# Convert your markdown files into PDF
 
-The [convert.py file](convert.py) will call [functions](gather_files.py) to find all ".md" files from a path and subpath. These files will be merge in only one ".md" file. Then this new .md file will be converteed in a pdf file.
+The [convert.py file](convert.py) will call [functions](gather_files.py) to find all ".md" files from a path and subpath. All detected .md files will be gather and merge in only one ".md" file. Then this new .md file will be converted in a pdf file.
 
 ## Build docker container
 
@@ -11,12 +11,12 @@ You will find the [dockerfile here](dockerfile) used to build the image.
 
 **Run the container** \
 `docker run --name ConvertMdToPdf -it --rm -v .:/app/pdf_documentation  md_to_pdf:latest`\
-**Comment:** final pdf will be save inside container on path */app/pdf_documentation*. Then a volume is mounted to be able to get this pdf.  This volume is use to add inside the container the .md files that you want convert into pdf.
+**Comment:** A volume is used to mount wihtin the container your .md files that you want convert into pdf. As result, the generated .pdf file will be save inside the container in path */app/pdf_documentation*. Thanks to this volume you will be able to get the generated .pdf file. 
 
 **Add extra env var**
-* DEBUG: If DEBUG is not empty (no matter the value), debug will be activated and some prompt will appears.
-* TO_EXCLUDE: Add words or files names to exclude from the convertion.
-* FILE_NAME: file name used for created files (.md and .pdf). Do not add extension. If not defined, default value is "Documentation".
+* DEBUG: If DEBUG is not empty (no matter the value), debug will be activated and some prompts will appears.
+* TO_EXCLUDE: Files names that you do not want add in the generated pdf. 
+* FILE_NAME: Name of the generated files (.md and .pdf). Do not add extension. Default value is "Documentation".
 
 Command example with these var env: \
 `docker run --name ConvertMdToPdf -it --rm -v .:/app/pdf_documentation -e DEBUG=True  -e TO_EXCLUDE="README,test.md" -e FILE_NAME="MyFileName" md_to_pdf:latest`

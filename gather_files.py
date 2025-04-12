@@ -56,4 +56,3 @@ def createUniqueMdFile(file_list: list, my_file_name: str):
         for file_path in file_list:
             with open(file_path, 'r', encoding='utf-8') as fin:
                 fout.write(fin.read())
-                fout.write('\n')    #Add line break betweend each files.

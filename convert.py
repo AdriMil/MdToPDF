@@ -29,6 +29,3 @@ if debug_level:
 createUniqueMdFile(file_list=my_md_files, my_file_name=md_file_name)        #Create a unique .md file
 
 pdf = MarkdownPdf(toc_level=False)
-pdf.add_section(Section(open(md_file_name, encoding='utf-8').read()))
-pdf.meta["title"] = "MarkdownPdf module"                                    
-pdf.save("pdf_documentation/" + pdf_file_name)                              #Pdf creation

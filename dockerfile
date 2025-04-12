@@ -8,4 +8,8 @@ RUN pip install -r requirements.txt
 COPY convert.py .
 COPY gather_files.py functions.py .
 
+RUN adduser --disabled-password --gecos '' appuser
+RUN chown -R appuser:appuser /app
+USER appuser
+
 CMD ["python","convert.py"]

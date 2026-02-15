@@ -26,3 +26,24 @@ You must add a `style.css` file when running the container using a volume `-v ./
 
 Command example with these var env: \
 `docker run --name ConvertMdToPdf -it --rm -v .:/app/pdf_documentation -e DEBUG=True  -e TO_EXCLUDE="README,test.md" -e FILE_NAME="MyFileName" md_to_pdf:latest`
+
+## Push docker image to GitHub registry
+
+**WARNING**: It ise mandatory to oush 2 versions. 1 version to keep history with version like x.y.z and 1 with "latest" in order to be used by the ci. Then it is not necessary to update the ci file at each new version.
+
+**Build docker image** \
+From [github repository](https://github.com/AdriMil/MdToPDF/pkgs/container/mdtopdf/versions), check last version available. You will need to up the version. Then build image using this name: \
+`docker build -t ghcr.io/<Github_User_Name>/mdtopdf:<verison> .` \
+*Example:* `docker build -t ghcr.io/adrimil/mdtopdf:0.0.5 .` \
+*Example:* `docker build -t ghcr.io/adrimil/mdtopdf:latest .`
+
+**Add a token** \
+Create a token from GitHub settings with read and write rights.
+
+**Connect to github image registry** \
+`echo <TOKEN> | docker login ghcr.io -u adrimil --password-stdin`
+
+**Push your image to the registry** \
+`docker push ghcr.io/<Github_User_Name>/mdtopdf:<verison>` \
+*Example:* `docker push ghcr.io/adrimil/mdtopdf:0.0.5` \
+*Example:* `docker push ghcr.io/adrimil/mdtopdf:latest`

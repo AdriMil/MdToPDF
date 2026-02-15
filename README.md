@@ -11,7 +11,13 @@ You will find the [dockerfile here](dockerfile) used to build the image.
 
 **Run the container** \
 `docker run --name ConvertMdToPdf -it --rm -v .:/app/pdf_documentation  md_to_pdf:latest`\
-**Comment:** A volume is used to mount wihtin the container your .md files that you want convert into pdf. As result, the generated .pdf file will be save inside the container in path */app/pdf_documentation*. Thanks to this volume you will be able to get the generated .pdf file. 
+**Comment:** A volume is used to mount wihtin the container your .md files that you want convert into pdf. As result, the generated .pdf file will be save inside the container in path */app/pdf_documentation*. Thanks to this volume you will be able to get the generated .pdf file.
+
+**Add personnalized style to the generated Documentation** \
+You can load custome colors for titles sections to the generated pdf. \
+You must add a `style.css` file when running the container using a volume `-v ./style.css:/app/style.css`, example:
+
+`docker run --name ConvertMdToPdf -it --rm -v .:/app/pdf_documentation -v ./style.css:/app/style.css md_to_pdf:latest;`
 
 **Add extra env var**
 * DEBUG: If DEBUG is not empty (no matter the value), debug will be activated and some prompts will appears.

@@ -7,7 +7,7 @@ The [convert.py file](convert.py) will call [functions](gather_files.py) to find
 You will find the [dockerfile here](dockerfile) used to build the image.
 
 **Build docker image** \
-` docker build -t md_to_pdf .` \
+` docker build -t md_to_pdf .`
 
 **Run the container** \
 `docker run --name ConvertMdToPdf -it --rm -v .:/app/pdf_documentation  md_to_pdf:latest`\

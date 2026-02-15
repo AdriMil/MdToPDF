@@ -62,4 +62,8 @@ def createUniqueMdFile(file_list: list, my_file_name: str):
         for file_path in file_list:
             with open(file_path, encoding="utf-8") as fin:
                 fout.write(fin.read())
-                fout.write("\n")  # Add line break betweend each files.
+
+                ## Add a page break between each file to avoid merging titles and content of different files
+                fout.write("\n")
+                fout.write("<div style='page-break-before: always;'></div>") # CSS Page break well supported by markdown-pdf module
+                fout.write("\n\n")  # Double line break to separate content of different files - 1 for page break and 1 for separation of content

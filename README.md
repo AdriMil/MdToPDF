@@ -26,3 +26,20 @@ You must add a `style.css` file when running the container using a volume `-v ./
 
 Command example with these var env: \
 `docker run --name ConvertMdToPdf -it --rm -v .:/app/pdf_documentation -e DEBUG=True  -e TO_EXCLUDE="README,test.md" -e FILE_NAME="MyFileName" md_to_pdf:latest`
+
+## Push docker image to GitHub registry
+
+**Build docker image** \
+From [github repository](https://github.com/AdriMil/MdToPDF/pkgs/container/mdtopdf/versions), check last version available. You will need to up the version. Then build image using this name: \
+`docker build -t ghcr.io/<Github_User_Name>/mdtopdf:<verison> .` \
+*Example:* `docker build -t ghcr.io/adrimil/mdtopdf:0.0.5 .`
+
+**Add a token** \
+Create a token from GitHub settings with read and write rights.
+
+**Connect to github image registry** \
+`echo <TOKEN> | docker login ghcr.io -u adrimil --password-stdin`
+
+**Push your image to the registry** \
+`docker push ghcr.io/<Github_User_Name>/mdtopdf:<verison>` \
+*Example:* `docker push ghcr.io/adrimil/mdtopdf:0.0.5`

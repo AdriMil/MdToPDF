@@ -45,7 +45,7 @@ except FileNotFoundError:
     if debug_level:
         print("CSS file not found. Proceeding without custom styles.")
 
-pdf = MarkdownPdf(toc_level=False)
+pdf = MarkdownPdf(toc_level=2)
 pdf.add_section(
     Section(
         open(md_file_name, encoding="utf-8").read()
